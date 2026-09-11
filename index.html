@@ -1339,9 +1339,11 @@
   <canvas id="particle-canvas"></canvas>
 
   <!-- Audio Element -->
-  <audio id="bg-audio" autoplay loop preload="auto">
-    <source src="https://docs.google.com/uc?export=download&id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy" type="audio/mp3" />
+  <audio id="bg-audio" loop preload="auto" playsinline webkit-playsinline>
+    <source src="kesima.mp3" type="audio/mp3" />
+    <source src="./kesima.mp3" type="audio/mp3" />
     <source src="https://drive.usercontent.google.com/download?id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy&export=download&confirm=t" type="audio/mp3" />
+    <source src="https://docs.google.com/uc?export=download&id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy" type="audio/mp3" />
     Browser kamu tidak mendukung pemutar audio.
   </audio>
 
@@ -1779,18 +1781,27 @@
        -------------------------------------------------------------------------- */
     let audioCtx = null;
     function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (!hasUnlocked) return null;
+      try {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            audioCtx = new AudioContextClass();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume().catch(() => {});
+        }
+        return audioCtx;
+      } catch (e) {
+        return null;
       }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-      return audioCtx;
     }
 
     function playCuteChime(type = 'pop') {
       try {
         const ctx = getAudioContext();
+        if (!ctx) return;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
 
@@ -2266,23 +2277,15 @@
     }
 
     /* --------------------------------------------------------------------------
-       10. INITIALIZATION & AUTOPLAY TRIGGER
+       10. INITIALIZATION
        -------------------------------------------------------------------------- */
     function initApp() {
       renderGallery();
       updateNavUI();
-      playAudio();
+      setupAutoplayFallback();
     }
 
     window.addEventListener('DOMContentLoaded', initApp);
-    window.addEventListener('load', () => {
-      if (!isPlaying) playAudio();
-    });
-
-    // Immediate attempt
-    try {
-      playAudio();
-    } catch(e) {}
   </script>
 </body>
 </html>
