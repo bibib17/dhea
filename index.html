@@ -1166,13 +1166,18 @@
         height: 180px;
       }
       .floating-audio-player {
-        bottom: 80px;
-        right: 14px;
-        padding: 6px 12px 6px 8px;
+        top: 72px;
+        bottom: auto;
+        right: 12px;
+        padding: 5px 12px 5px 6px;
+        z-index: 90;
+        transform: scale(0.92);
+        transform-origin: top right;
       }
       .bottom-nav-bar {
-        bottom: 14px;
-        padding: 6px 10px;
+        bottom: 16px;
+        padding: 8px 12px;
+        z-index: 100;
       }
       .neu-btn {
         padding: 11px 20px;
@@ -1308,7 +1313,7 @@
 <body>
 
   <!-- Fullscreen Interactive Opening Splash (Bypass Browser Autoplay Blocks Instantly) -->
-  <div class="welcome-splash-overlay" id="welcome-splash" onclick="dismissSplashAndPlay()">
+  <div class="welcome-splash-overlay" id="welcome-splash" onclick="unlockAudioOnce(true)">
     <div class="splash-box">
       <div class="splash-avatar-ring">
         <img src="https://lh3.googleusercontent.com/d/1FkWo1gnNU8uZRhDpwG3XLF6Yr2GINLvA" alt="Dhea Aryan Permata" />
@@ -1827,23 +1832,20 @@
     }
 
     /* --------------------------------------------------------------------------
-       3. BACKGROUND MUSIC (1000X.mp3) CONTROLLER
+       3. BACKGROUND MUSIC (Kesima) CONTROLLER
        -------------------------------------------------------------------------- */
     const bgAudio = document.getElementById('bg-audio');
     const vinyl = document.getElementById('vinyl');
     const audioPill = document.getElementById('audio-pill');
     const audioStatus = document.getElementById('audio-status');
     let isPlaying = false;
+    let hasUnlocked = false;
 
-    function dismissSplashAndPlay() {
-      const splash = document.getElementById('welcome-splash');
-      if (splash) {
-        splash.classList.add('hidden');
-      }
-      playAudio();
-      playCuteChime('heart');
-      spawnHeartsCelebration("Selamat Menikmati Ruangan Cinta Ini, Dhea Sayang! 🌸💖");
-    }
+    const audioUrls = [
+      "https://drive.usercontent.google.com/download?id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy&export=download&confirm=t",
+      "https://docs.google.com/uc?export=download&id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy"
+    ];
+    let audioUrlIndex = 0;
 
     function playAudio() {
       if (isPlaying) return;
@@ -1856,7 +1858,7 @@
           audioStatus.textContent = "Sedang Memutar 💖";
           const splash = document.getElementById('welcome-splash');
           if (splash) splash.classList.add('hidden');
-          removeAutoplayListeners();
+          removeAutoplayFallback();
         }).catch(err => {
           console.log("Autoplay ditahan oleh browser policy, menunggu interaksi pertama:", err);
           setupAutoplayFallback();
@@ -1864,19 +1866,48 @@
       }
     }
 
+    bgAudio.addEventListener('error', (e) => {
+      console.log("Audio load fallback triggered...", e);
+      audioUrlIndex = (audioUrlIndex + 1) % audioUrls.length;
+      bgAudio.src = audioUrls[audioUrlIndex];
+      if (hasUnlocked) {
+        bgAudio.play().catch(() => {});
+      }
+    });
+
+    function unlockAudioOnce(showToast = false) {
+      if (hasUnlocked) return;
+      hasUnlocked = true;
+      removeAutoplayFallback();
+
+      const splash = document.getElementById('welcome-splash');
+      if (splash) {
+        splash.classList.add('hidden');
+      }
+
+      playAudio();
+      playCuteChime('heart');
+
+      if (showToast) {
+        spawnHeartsCelebration("Selamat Menikmati Ruangan Cinta Ini, Dhea Sayang! 🌸💖");
+      }
+    }
+
+    const interactionEvents = ['pointerdown', 'touchstart', 'click'];
+    const onFirstUserInteraction = () => {
+      unlockAudioOnce(false);
+    };
+
     function setupAutoplayFallback() {
-      const startOnInteraction = () => {
-        if (!isPlaying) {
-          dismissSplashAndPlay();
-        }
-      };
-      ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'pointerdown'].forEach(evt => {
-        window.addEventListener(evt, startOnInteraction, { once: true, passive: true });
+      interactionEvents.forEach(evt => {
+        window.addEventListener(evt, onFirstUserInteraction, { once: true, passive: true });
       });
     }
 
-    function removeAutoplayListeners() {
-      // Event listeners with { once: true } are auto-removed
+    function removeAutoplayFallback() {
+      interactionEvents.forEach(evt => {
+        window.removeEventListener(evt, onFirstUserInteraction);
+      });
     }
 
     function pauseAudio() {
@@ -1892,6 +1923,7 @@
       if (isPlaying) {
         pauseAudio();
       } else {
+        unlockAudioOnce(false);
         playAudio();
       }
     }
@@ -1966,8 +1998,7 @@
 
     function startJourney() {
       playCuteChime('heart');
-      playAudio();
-      spawnHeartsCelebration("Selamat Menikmati Ruangan Cinta Ini, Dhea Sayang! 🌸💖");
+      unlockAudioOnce(true);
       goToPage(1);
     }
 
