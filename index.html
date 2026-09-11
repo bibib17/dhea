@@ -1253,13 +1253,7 @@
   <canvas id="particle-canvas"></canvas>
 
   <!-- Audio Element -->
-  <audio id="bg-audio" loop preload="auto" playsinline webkit-playsinline>
-    <source src="kesima.mp3" type="audio/mp3" />
-    <source src="./kesima.mp3" type="audio/mp3" />
-    <source src="https://drive.usercontent.google.com/download?id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy&export=download&confirm=t" type="audio/mp3" />
-    <source src="https://docs.google.com/uc?export=download&id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy" type="audio/mp3" />
-    Browser kamu tidak mendukung pemutar audio.
-  </audio>
+  <audio id="bg-audio" loop preload="auto" playsinline webkit-playsinline src="https://drive.usercontent.google.com/download?id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy&export=download&confirm=t"></audio>
 
   <!-- Top Glassmorphism Navigation Bar (Hidden on Screen 0 Gate) -->
   <header class="glass-navbar nav-hidden" id="main-navbar">
@@ -1685,73 +1679,7 @@
     ];
 
     /* --------------------------------------------------------------------------
-       2. SOUND SYNTHESIZER (WEB AUDIO API) FOR CUTE CHIMES & FEEDBACK
-       -------------------------------------------------------------------------- */
-    let audioCtx = null;
-    function getAudioContext() {
-      if (!hasUnlocked) return null;
-      try {
-        if (!audioCtx) {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          if (AudioContextClass) {
-            audioCtx = new AudioContextClass();
-          }
-        }
-        if (audioCtx && audioCtx.state === 'suspended') {
-          audioCtx.resume().catch(() => {});
-        }
-        return audioCtx;
-      } catch (e) {
-        return null;
-      }
-    }
-
-    function playCuteChime(type = 'pop') {
-      try {
-        const ctx = getAudioContext();
-        if (!ctx) return;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        const now = ctx.currentTime;
-
-        if (type === 'pop') {
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(587.33, now); // D5
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
-          osc.start(now);
-          osc.stop(now + 0.15);
-        } else if (type === 'heart') {
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(523.25, now); // C5
-          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
-          osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
-          osc.frequency.setValueAtTime(1046.50, now + 0.24); // C6
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-          osc.start(now);
-          osc.stop(now + 0.45);
-        } else if (type === 'warm') {
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.linearRampToValueAtTime(554.37, now + 0.25);
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-          osc.start(now);
-          osc.stop(now + 0.5);
-        }
-      } catch (e) {
-        // Silent fallback if audio context blocked
-      }
-    }
-
-    /* --------------------------------------------------------------------------
-       3. BACKGROUND MUSIC (Kesima) CONTROLLER
+       2. BACKGROUND MUSIC (Kesima) CONTROLLER (ROBUST MULTI-SOURCE STREAMING)
        -------------------------------------------------------------------------- */
     const bgAudio = document.getElementById('bg-audio');
     const vinyl = document.getElementById('vinyl');
@@ -1759,10 +1687,11 @@
     let isPlaying = false;
     let hasUnlocked = false;
 
+    // High-priority direct streaming URLs with offline fallback
     const audioUrls = [
+      "https://drive.usercontent.google.com/download?id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy&export=download&confirm=t",
       "kesima.mp3",
       "./kesima.mp3",
-      "https://drive.usercontent.google.com/download?id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy&export=download&confirm=t",
       "https://docs.google.com/uc?export=download&id=1TQ9UGknKnqdcqTvd1H8qG3t0xdmO4Jsy"
     ];
     let audioUrlIndex = 0;
@@ -1778,38 +1707,41 @@
     }
 
     function playAudio() {
-      if (isPlaying) return;
+      if (!bgAudio) return;
+      hasUnlocked = true;
+      bgAudio.volume = 1.0;
+
       const playPromise = bgAudio.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
           isPlaying = true;
           updateMusicUI();
         }).catch(err => {
-          console.log("Audio play error, trying fallback source:", err);
-          if (audioUrlIndex < audioUrls.length - 1) {
-            audioUrlIndex++;
-            bgAudio.src = audioUrls[audioUrlIndex];
-            bgAudio.load();
-            bgAudio.play().then(() => {
-              isPlaying = true;
-              updateMusicUI();
-            }).catch(() => {});
-          }
+          console.warn("Audio play error, switching source:", err);
+          tryFallbackAudio();
         });
       }
     }
 
-    bgAudio.addEventListener('error', (e) => {
-      console.log("Audio load error fallback triggered...");
-      audioUrlIndex = (audioUrlIndex + 1) % audioUrls.length;
-      bgAudio.src = audioUrls[audioUrlIndex];
-      bgAudio.load();
-      if (hasUnlocked) {
-        bgAudio.play().then(() => {
-          isPlaying = true;
-          updateMusicUI();
-        }).catch(() => {});
+    function tryFallbackAudio() {
+      if (audioUrlIndex < audioUrls.length - 1) {
+        audioUrlIndex++;
+        bgAudio.src = audioUrls[audioUrlIndex];
+        bgAudio.load();
+        const p = bgAudio.play();
+        if (p !== undefined) {
+          p.then(() => {
+            isPlaying = true;
+            updateMusicUI();
+          }).catch(e => {
+            console.warn("Fallback source failed:", e);
+          });
+        }
       }
+    }
+
+    bgAudio.addEventListener('error', () => {
+      tryFallbackAudio();
     });
 
     bgAudio.addEventListener('playing', () => {
@@ -1823,20 +1755,23 @@
     });
 
     function pauseAudio() {
-      bgAudio.pause();
+      if (bgAudio) {
+        bgAudio.pause();
+      }
       isPlaying = false;
       updateMusicUI();
     }
 
     function toggleAudio() {
-      playCuteChime('pop');
       if (isPlaying) {
         pauseAudio();
       } else {
-        hasUnlocked = true;
         playAudio();
       }
     }
+
+    // Safe sound stub without AudioContext warnings
+    function playCuteChime() {}
 
     /* --------------------------------------------------------------------------
        4. MULTI-PAGE / CHAPTER NAVIGATION SYSTEM
@@ -1926,9 +1861,7 @@
 
     function startJourney() {
       hasUnlocked = true;
-      getAudioContext();
       playAudio();
-      playCuteChime('heart');
       spawnHeartsCelebration("Selamat datang wanitaku tersayang! Abib selalu ada untuk Dhea 🥰💖");
       goToPage(1);
     }
