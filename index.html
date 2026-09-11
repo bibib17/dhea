@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Spesial Buat Dhea Aryan Permata 🌸 Dari Abib</title>
+  <meta name="description" content="Website cinta interaktif spesial dari Abib untuk menyemangati dan merawat Dhea Aryan Permata tersayang." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Sacramento&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. ROOT DESIGN TOKENS (NEUMORPHISM + FROSTED GLASS IN SOFT PINK & WHITE)
+       ========================================================================== */
+    :root {
+      --bg-base: #FFF2F6;
+      --bg-gradient: radial-gradient(circle at 10% 20%, #FFF5F8 0%, #FFE5ED 40%, #FFF0F5 90%);
+      
+      /* Neumorphism Shadows (Soft Pink & Crisp White) */
+      --neu-light: #FFFFFF;
+      --neu-dark: #E6BAC8;
+      --neu-convex: 12px 12px 28px var(--neu-dark), -12px -12px 28px var(--neu-light);
+      --neu-flat: 8px 8px 20px rgba(226, 179, 193, 0.6), -8px -8px 20px #FFFFFF;
+      --neu-card: 16px 16px 36px rgba(226, 175, 190, 0.45), -12px -12px 30px #FFFFFF;
+      --neu-pressed: inset 5px 5px 10px rgba(216, 163, 179, 0.5), inset -5px -5px 10px #FFFFFF;
+      --neu-btn-hover: 14px 14px 28px rgba(216, 163, 179, 0.6), -10px -10px 24px #FFFFFF;
+      --neu-glow: 0 0 25px rgba(255, 105, 145, 0.35);
+
+      /* Glassmorphism Tokens */
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-card: rgba(255, 255, 255, 0.78);
+      --glass-pill: rgba(255, 255, 255, 0.85);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.9);
+      --glass-border-strong: 1.5px solid rgba(255, 255, 255, 0.95);
+      --glass-shadow: 0 16px 40px 0 rgba(230, 150, 175, 0.22);
+      --blur-strength: blur(20px) saturate(180%);
+
+      /* Romantic Palette */
+      --primary: #FF5E8E;
+      --primary-hover: #F7447B;
+      --primary-light: #FFE2EB;
+      --accent-rose: #FF3366;
+      --accent-gold: #E8A87C;
+      --text-main: #3E2F37;
+      --text-secondary: #745866;
+      --text-muted: #9E8291;
+      --text-highlight: #E6005C;
+      
+      /* Typography */
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Quicksand', sans-serif;
+      --font-romantic: 'Playfair Display', serif;
+      --font-script: 'Sacramento', cursive;
+
+      /* Radii */
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 32px;
+      --radius-full: 9999px;
+      
+      --transition-smooth: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-fast: all 0.2s ease;
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE SETUP
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background: var(--bg-base);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Particle Background Canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Ambient Romantic Lighting Blobs */
+    .ambient-glow {
+      position: fixed;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 182, 193, 0.45) 0%, rgba(255, 230, 240, 0) 70%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatAmbient 18s ease-in-out infinite alternate;
+    }
+    .ambient-glow-1 { top: -100px; left: -100px; }
+    .ambient-glow-2 { bottom: -120px; right: -80px; animation-delay: -9s; }
+    .ambient-glow-3 { top: 45%; left: 60%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(255, 192, 203, 0.3) 0%, transparent 70%); }
+
+    @keyframes floatAmbient {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.1); }
+      100% { transform: translate(-40px, 80px) scale(0.95); }
+    }
+
+    /* ==========================================================================
+       3. NEUMORPHIC & GLASS COMPONENTS
+       ========================================================================== */
+    .neu-card {
+      background: var(--glass-card);
+      backdrop-filter: var(--blur-strength);
+      -webkit-backdrop-filter: var(--blur-strength);
+      border: var(--glass-border-strong);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--neu-card), var(--glass-shadow);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .neu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .neu-inset {
+      background: rgba(255, 240, 246, 0.7);
+      border-radius: var(--radius-md);
+      box-shadow: var(--neu-pressed);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* Tactile Neumorphic Buttons */
+    .neu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary-hover);
+      background: #FFFFFF;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius-full);
+      padding: 14px 28px;
+      box-shadow: var(--neu-flat);
+      cursor: pointer;
+      outline: none;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .neu-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--neu-btn-hover), var(--neu-glow);
+      color: var(--accent-rose);
+    }
+
+    .neu-btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: var(--neu-pressed);
+    }
+
+    .neu-btn-primary {
+      background: linear-gradient(135deg, #FF6F96 0%, #FF457E 100%);
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 10px 24px rgba(255, 69, 126, 0.35), var(--neu-flat);
+    }
+
+    .neu-btn-primary:hover {
+      background: linear-gradient(135deg, #FF80A4 0%, #FF3371 100%);
+      box-shadow: 0 14px 30px rgba(255, 69, 126, 0.45), var(--neu-glow);
+    }
+
+    .neu-btn-sm {
+      padding: 9px 18px;
+      font-size: 0.88rem;
+      border-radius: var(--radius-full);
+    }
+
+    /* ==========================================================================
+       4. MAIN WRAPPER & TOP/BOTTOM FLOATING CONTROLS
+       ========================================================================== */
+    .app-container {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 90px 20px 120px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Floating Apple-Style Glass Header Navigation */
+    .glass-navbar {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 36px);
+      max-width: 820px;
+      height: 64px;
+      background: var(--glass-pill);
+      backdrop-filter: var(--blur-strength);
+      -webkit-backdrop-filter: var(--blur-strength);
+      border: var(--glass-border-strong);
+      border-radius: var(--radius-full);
+      box-shadow: var(--neu-flat), var(--glass-shadow);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .nav-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+      box-shadow: var(--neu-flat);
+      object-fit: cover;
+    }
+
+    .nav-title-box h1 {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-title-box p {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Chapter Indicator Pills in Header */
+    .nav-chapters {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chapter-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: var(--neu-flat);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .chapter-dot.active {
+      background: linear-gradient(135deg, #FF6F96, #FF3D77);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(255, 61, 119, 0.4);
+      transform: scale(1.12);
+    }
+
+    /* Floating Audio Player Widget */
+    .floating-audio-player {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      background: var(--glass-pill);
+      backdrop-filter: var(--blur-strength);
+      -webkit-backdrop-filter: var(--blur-strength);
+      border: var(--glass-border-strong);
+      border-radius: var(--radius-full);
+      padding: 8px 16px 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--neu-card), var(--glass-shadow);
+      transition: var(--transition-smooth);
+    }
+
+    .floating-audio-player:hover {
+      transform: translateY(-4px);
+    }
+
+    .vinyl-disc {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2A2A2A 30%, #111111 70%);
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: spinVinyl 5s linear infinite paused;
+    }
+
+    .vinyl-disc.playing {
+      animation-play-state: running;
+    }
+
+    .vinyl-center {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 2px solid #FFFFFF;
+    }
+
+    @keyframes spinVinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .audio-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .audio-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .audio-sub {
+      font-size: 0.68rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .audio-wave {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      height: 4px;
+      transition: height 0.2s ease;
+    }
+
+    .floating-audio-player.playing .wave-bar:nth-child(1) { animation: wavePulse 0.9s ease-in-out infinite alternate; }
+    .floating-audio-player.playing .wave-bar:nth-child(2) { animation: wavePulse 0.6s ease-in-out 0.2s infinite alternate; }
+    .floating-audio-player.playing .wave-bar:nth-child(3) { animation: wavePulse 1.1s ease-in-out 0.4s infinite alternate; }
+    .floating-audio-player.playing .wave-bar:nth-child(4) { animation: wavePulse 0.7s ease-in-out 0.1s infinite alternate; }
+
+    @keyframes wavePulse {
+      0% { height: 4px; }
+      100% { height: 18px; }
+    }
+
+    /* Bottom Navigation Bar for Chapter Navigation */
+    .bottom-nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 95;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--glass-pill);
+      backdrop-filter: var(--blur-strength);
+      -webkit-backdrop-filter: var(--blur-strength);
+      border: var(--glass-border-strong);
+      border-radius: var(--radius-full);
+      padding: 8px 14px;
+      box-shadow: var(--neu-flat), var(--glass-shadow);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-progress-text {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      padding: 0 6px;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       5. CHAPTER PAGES / SCREENS MANAGEMENT
+       ========================================================================== */
+    .page-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .page-section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Section Headings */
+    .section-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: var(--neu-flat);
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, #FF4B7E 0%, #D81B60 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       SCREEN 0: THE INTERACTIVE OPENING ENVELOPE GATE
+       ========================================================================== */
+    .gate-card {
+      padding: 45px 32px;
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+    }
+
+    .gate-avatar-box {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 24px auto;
+    }
+
+    .gate-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #FFFFFF;
+      box-shadow: var(--neu-card), 0 0 25px rgba(255, 110, 150, 0.35);
+      transition: var(--transition-smooth);
+    }
+
+    .gate-avatar:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .gate-badge-crown {
+      position: absolute;
+      top: -12px;
+      right: -4px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: var(--neu-flat);
+      animation: bounceSoft 2.5s ease-in-out infinite;
+    }
+
+    @keyframes bounceSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .gate-name {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .gate-subname {
+      font-family: var(--font-romantic);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--primary);
+      margin-bottom: 18px;
+    }
+
+    .gate-message-box {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 28px;
+      box-shadow: var(--neu-pressed);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      line-height: 1.65;
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+    }
+
+    /* Envelope Illustration Animation */
+    .envelope-box {
+      width: 110px;
+      height: 90px;
+      background: #FFFFFF;
+      margin: 0 auto 20px auto;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: var(--neu-flat);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .envelope-box:hover {
+      transform: scale(1.1) rotate(-3deg);
+      box-shadow: var(--neu-btn-hover), var(--neu-glow);
+    }
+
+    /* ==========================================================================
+       CHAPTER 1: PERIOD COMFORT & EMERGENCY CARE KIT
+       ========================================================================== */
+    .care-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .care-item-card {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--glass-card);
+      backdrop-filter: var(--blur-strength);
+      -webkit-backdrop-filter: var(--blur-strength);
+      border: var(--glass-border-strong);
+      box-shadow: var(--neu-flat);
+      transition: var(--transition-smooth);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .care-item-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--neu-card), var(--neu-glow);
+    }
+
+    .care-icon-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .care-icon-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: var(--neu-flat);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      flex-shrink: 0;
+    }
+
+    .care-title {
+      font-family: var(--font-heading);
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .care-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    /* Hugs Interactive Counter Box */
+    .hug-counter-box {
+      grid-column: 1 / -1;
+      padding: 30px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 238, 245, 0.85) 100%);
+      border-radius: var(--radius-lg);
+      border: var(--glass-border-strong);
+      box-shadow: var(--neu-card);
+    }
+
+    .hug-number {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent-rose);
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .hug-stage-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      min-height: 28px;
+      margin-bottom: 16px;
+    }
+
+    /* Warm compress glow mode modal / state */
+    .warm-glow-active {
+      animation: warmBreathing 2.5s ease-in-out infinite alternate !important;
+    }
+
+    @keyframes warmBreathing {
+      0% { box-shadow: 0 0 15px rgba(255, 110, 150, 0.4), var(--neu-card); }
+      100% { box-shadow: 0 0 45px rgba(255, 75, 120, 0.7), var(--neu-card); }
+    }
+
+    /* ==========================================================================
+       CHAPTER 2: PHOTO GALLERY SHOWCASE (12 PHOTOS WITH MODERN FRAMES)
+       ========================================================================== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .photo-frame-card {
+      background: #FFFFFF;
+      padding: 14px 14px 18px 14px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--neu-flat), 0 10px 25px rgba(230, 150, 175, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      transition: var(--transition-smooth);
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .photo-frame-card:hover {
+      transform: translateY(-8px) rotate(1deg) scale(1.02);
+      box-shadow: var(--neu-card), var(--neu-glow);
+    }
+
+    /* Modern Tape / Cute Sticker on Photo */
+    .photo-tape {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 20px;
+      background: rgba(255, 214, 228, 0.75);
+      border-radius: 4px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+    }
+
+    .photo-img-wrap {
+      width: 100%;
+      height: 240px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.08);
+      background: #FFF0F5;
+    }
+
+    .photo-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .photo-frame-card:hover .photo-img-wrap img {
+      transform: scale(1.08);
+    }
+
+    .photo-caption-box {
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .photo-badge-cute {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 6px;
+    }
+
+    .photo-note {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(45, 25, 35, 0.75);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      background: #FFFFFF;
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .lightbox-modal.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-img {
+      width: 100%;
+      max-height: 60vh;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      background: #FFF0F5;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      border: none;
+    }
+
+    /* ==========================================================================
+       CHAPTER 3: GOMBALAN & CHEER-UP MACHINE
+       ========================================================================== */
+    .generator-box {
+      padding: 36px 28px;
+      text-align: center;
+      border-radius: var(--radius-lg);
+      margin-bottom: 32px;
+    }
+
+    .quote-display-wrap {
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      margin: 20px 0 28px 0;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius-md);
+      box-shadow: var(--neu-pressed);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      position: relative;
+    }
+
+    .quote-text {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.6;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .quote-author {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+
+    .reasons-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 32px 0 18px 0;
+      text-align: center;
+    }
+
+    .reasons-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .reason-card {
+      background: var(--glass-card);
+      backdrop-filter: var(--blur-strength);
+      -webkit-backdrop-filter: var(--blur-strength);
+      padding: 18px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--neu-flat);
+      border: var(--glass-border-strong);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: var(--transition-smooth);
+    }
+
+    .reason-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--neu-card);
+    }
+
+    .reason-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .reason-text {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       CHAPTER 4: SECRET LOVE LETTER
+       ========================================================================== */
+    .letter-parchment {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 45px 36px;
+      box-shadow: var(--neu-card), 0 20px 50px rgba(220, 140, 165, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .letter-parchment::before {
+      content: '💌';
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.2rem;
+      background: #FFFFFF;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--neu-flat);
+    }
+
+    .letter-salutation {
+      font-family: var(--font-romantic);
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--accent-rose);
+      margin-bottom: 20px;
+    }
+
+    .letter-body p {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .letter-sign {
+      margin-top: 32px;
+      text-align: right;
+    }
+
+    .letter-sign-hand {
+      font-family: var(--font-script);
+      font-size: 2.8rem;
+      color: var(--primary-hover);
+      line-height: 1;
+    }
+
+    .letter-sign-name {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       CHAPTER 5: FINAL SECTION - PAP REQUEST FOR ABIB VIA WHATSAPP
+       ========================================================================== */
+    .final-request-card {
+      padding: 48px 32px;
+      text-align: center;
+      border-radius: var(--radius-lg);
+      max-width: 650px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 238, 246, 0.9) 100%);
+    }
+
+    .final-cat-emoji {
+      font-size: 4.5rem;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: bounceSoft 2s ease-in-out infinite;
+    }
+
+    .final-req-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .final-req-title span {
+      background: linear-gradient(135deg, #FF3366 0%, #FF6F96 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .final-req-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .wa-button-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: #FFFFFF !important;
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 18px 36px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.38), var(--neu-flat);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .wa-button-main:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 18px 36px rgba(37, 211, 102, 0.48), 0 0 25px rgba(37, 211, 102, 0.4);
+    }
+
+    .wa-button-main:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .quick-wa-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* Interactive Floating Heart Spawner on Click */
+    .click-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 24px;
+      z-index: 9999;
+      animation: floatUpFade 1.2s forwards cubic-bezier(0.12, 0.89, 0.32, 1);
+    }
+
+    @keyframes floatUpFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      }
+      50% {
+        transform: translate(-50%, -100px) scale(1.3) rotate(-15deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -180px) scale(1) rotate(20deg);
+      }
+    }
+
+    /* ==========================================================================
+       RESPONSIVENESS (MOBILE FRIENDLY)
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .app-container {
+        padding: 80px 14px 110px 14px;
+      }
+      .glass-navbar {
+        top: 10px;
+        height: 56px;
+        padding: 0 12px;
+        width: calc(100% - 20px);
+      }
+      .nav-title-box h1 {
+        font-size: 0.85rem;
+      }
+      .nav-title-box p {
+        display: none;
+      }
+      .chapter-dot {
+        width: 26px;
+        height: 26px;
+        font-size: 0.72rem;
+      }
+      .section-title {
+        font-size: 1.65rem;
+      }
+      .gate-name {
+        font-size: 1.8rem;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+      .photo-img-wrap {
+        height: 180px;
+      }
+      .floating-audio-player {
+        bottom: 80px;
+        right: 14px;
+        padding: 6px 12px 6px 8px;
+      }
+      .bottom-nav-bar {
+        bottom: 14px;
+        padding: 6px 10px;
+      }
+      .neu-btn {
+        padding: 11px 20px;
+        font-size: 0.9rem;
+      }
+      .wa-button-main {
+        width: 100%;
+        padding: 16px 20px;
+        font-size: 1rem;
+      }
+      .letter-parchment {
+        padding: 30px 20px;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ==========================================================================
+       WELCOME SPLASH / TAP TO UNLOCK AUDIO MODAL
+       ========================================================================== */
+    .welcome-splash-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, rgba(255, 245, 248, 0.97) 0%, rgba(255, 225, 235, 0.98) 100%);
+      backdrop-filter: blur(25px) saturate(180%);
+      -webkit-backdrop-filter: blur(25px) saturate(180%);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: pointer;
+      transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .welcome-splash-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.05);
+    }
+
+    .splash-box {
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--neu-card), var(--glass-shadow);
+      border: var(--glass-border-strong);
+    }
+
+    .splash-avatar-ring {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      margin: 0 auto 20px auto;
+      position: relative;
+      box-shadow: 0 0 35px rgba(255, 105, 145, 0.4), var(--neu-card);
+      padding: 4px;
+      background: #FFFFFF;
+    }
+
+    .splash-avatar-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .splash-pulse-heart {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      font-size: 2rem;
+      animation: pulseScale 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseScale {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+
+    .splash-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .splash-sub {
+      font-family: var(--font-romantic);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .splash-message {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 26px;
+    }
+
+    .splash-button-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #FFFFFF !important;
+      background: linear-gradient(135deg, #FF5E8E 0%, #FF3366 100%);
+      padding: 16px 32px;
+      border-radius: 9999px;
+      box-shadow: 0 12px 30px rgba(255, 51, 102, 0.45), 0 0 25px rgba(255, 94, 142, 0.5);
+      animation: pulseButton 2s infinite alternate;
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+    }
+
+    @keyframes pulseButton {
+      0% { transform: scale(0.98); box-shadow: 0 8px 24px rgba(255, 51, 102, 0.35); }
+      100% { transform: scale(1.04); box-shadow: 0 16px 36px rgba(255, 51, 102, 0.55), 0 0 30px rgba(255, 94, 142, 0.6); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Interactive Opening Splash (Bypass Browser Autoplay Blocks Instantly) -->
+  <div class="welcome-splash-overlay" id="welcome-splash" onclick="dismissSplashAndPlay()">
+    <div class="splash-box">
+      <div class="splash-avatar-ring">
+        <img src="photo_1.jpeg" alt="Dhea Aryan Permata" />
+        <div class="splash-pulse-heart">🌸</div>
+      </div>
+      <h2 class="splash-title">Spesial untuk Dhea 💖</h2>
+      <p class="splash-sub">Dhea Aryan Permata</p>
+      <p class="splash-message">
+        Ada surat cinta, lagu <em>Kesima</em>, dan kejutan spesial dari Abib untuk menemani Dhea hari ini... 🥰
+      </p>
+      <div class="splash-button-glow">
+        <span>💌 Sentuh Layar untuk Buka & Putar Musik ✨</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Ambient Glows -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+  <div class="ambient-glow ambient-glow-3"></div>
+
+  <!-- Interactive Particles Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Audio Element -->
+  <audio id="bg-audio" autoplay loop preload="auto">
+    <source src="kesima.mp3" type="audio/mp3" />
+    Browser kamu tidak mendukung pemutar audio.
+  </audio>
+
+  <!-- Top Glassmorphism Navigation Bar -->
+  <header class="glass-navbar">
+    <div class="nav-brand" onclick="goToPage(0)">
+      <img src="photo_1.jpeg" alt="Dhea" class="nav-avatar" />
+      <div class="nav-title-box">
+        <h1>Dhea Aryan Permata 🌸</h1>
+        <p>Special Room by Abib</p>
+      </div>
+    </div>
+    <div class="nav-chapters">
+      <div class="chapter-dot active" title="Halaman Pembuka" onclick="goToPage(0)">0</div>
+      <div class="chapter-dot" title="Chapter 1: Kotak P3K Cinta" onclick="goToPage(1)">1</div>
+      <div class="chapter-dot" title="Chapter 2: Galeri Bidadari" onclick="goToPage(2)">2</div>
+      <div class="chapter-dot" title="Chapter 3: Mesin Gombalan" onclick="goToPage(3)">3</div>
+      <div class="chapter-dot" title="Chapter 4: Surat Cinta" onclick="goToPage(4)">4</div>
+      <div class="chapter-dot" title="Chapter 5: Special Request" onclick="goToPage(5)">5</div>
+    </div>
+  </header>
+
+  <!-- Floating Music Player Pill -->
+  <div class="floating-audio-player" id="audio-pill" onclick="toggleAudio()">
+    <div class="vinyl-disc" id="vinyl">
+      <div class="vinyl-center"></div>
+    </div>
+    <div class="audio-info">
+      <span class="audio-title">Kesima 🎵</span>
+      <span class="audio-sub" id="audio-status">Klik untuk Putar</span>
+    </div>
+    <div class="audio-wave">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
+  </div>
+
+  <!-- Main Multi-Page App Container -->
+  <main class="app-container">
+
+    <!-- ========================================================================
+         SCREEN 0: THE INTERACTIVE OPENING ENVELOPE GATE
+         ======================================================================== -->
+    <section class="page-section active" id="page-0">
+      <div class="neu-card gate-card">
+        <div class="gate-avatar-box">
+          <img src="photo_1.jpeg" alt="Dhea Aryan Permata" class="gate-avatar" />
+          <div class="gate-badge-crown">👑</div>
+        </div>
+
+        <h2 class="gate-name">Hai, Cantiknya Abib 🥰</h2>
+        <p class="gate-subname">Dhea Aryan Permata</p>
+
+        <div class="envelope-box" onclick="startJourney()">
+          💌
+        </div>
+
+        <div class="gate-message-box">
+          <p>
+            Abib tahu hari ini perut Dhea lagi sakit banget karena hari pertama datang bulan yaa? 🥺<br>
+            Jangan sedih ya sayang, Abib bikinin website istimewa ini khusus buat nemenin, merawat, dan bikin Dhea tersenyum lagi hari ini!
+          </p>
+        </div>
+
+        <button class="neu-btn neu-btn-primary" onclick="startJourney()">
+          <span>Buka Surat Cinta & Mulai Musik 💖</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CHAPTER 1: PERIOD COMFORT & EMERGENCY CARE KIT
+         ======================================================================== -->
+    <section class="page-section" id="page-1">
+      <div class="section-header">
+        <div class="section-badge">🌸 Chapter 1 &bull; Comfort & Care</div>
+        <h2 class="section-title">P3K Cinta untuk <span>Dhea Sayang</span> ❤️🩹</h2>
+        <p class="section-desc">
+          Hari pertama menstruasi memang bikin lemas dan sakit perut. Tapi ingat, Abib selalu ada di sini buat nemenin dan jagain kamu.
+        </p>
+      </div>
+
+      <div class="care-grid">
+        <!-- Care 1: Kompres Hangat -->
+        <div class="care-item-card" id="warm-card">
+          <div class="care-icon-header">
+            <div class="care-icon-circle">♨️</div>
+            <div>
+              <h3 class="care-title">Kompres Hangat Virtual</h3>
+              <span style="font-size: 0.78rem; color: var(--primary); font-weight: 600;">Sembuhkan Kram Perut</span>
+            </div>
+          </div>
+          <p class="care-desc">
+            Rebahkan tubuhmu dengan nyaman yaa sayang. Bayangkan tangan hangat Abib sedang mengelus lembut perutmu agar rasa sakitnya hilang perlahan.
+          </p>
+          <button class="neu-btn neu-btn-sm" onclick="triggerWarmCompress()">
+            <span id="warm-btn-text">Nyalakan Kehangatan 🌟</span>
+          </button>
+        </div>
+
+        <!-- Care 2: Teh Hangat & Cokelat -->
+        <div class="care-item-card">
+          <div class="care-icon-header">
+            <div class="care-icon-circle">🍵</div>
+            <div>
+              <h3 class="care-title">Teh & Cokelat Manis</h3>
+              <span style="font-size: 0.78rem; color: var(--primary); font-weight: 600;">Mood Booster</span>
+            </div>
+          </div>
+          <p class="care-desc">
+            Jangan minum yang dingin-dingin dulu yaa cintaku. Minum air putih hangat yang banyak atau teh chamomile biar perutnya rileks.
+          </p>
+          <button class="neu-btn neu-btn-sm" onclick="spawnHeartsCelebration('🍫 Secangkir Teh Hangat & Cokelat Spesial untuk Dhea!')">
+            <span>Kirim Cokelat Virtual 🍫</span>
+          </button>
+        </div>
+
+        <!-- Care 3: Voucher Manja -->
+        <div class="care-item-card">
+          <div class="care-icon-header">
+            <div class="care-icon-circle">👑</div>
+            <div>
+              <h3 class="care-title">Voucher Bebas Manja</h3>
+              <span style="font-size: 0.78rem; color: var(--primary); font-weight: 600;">Berlaku Selamanya</span>
+            </div>
+          </div>
+          <p class="care-desc">
+            Hari ini kalau Dhea mau ngambek, mau nangis, atau mau manja seharian, 100% GRATIS dan DIPERBOLEHKAN! Abib siap jadi pendengar setia.
+          </p>
+          <button class="neu-btn neu-btn-sm" onclick="redeemVoucher()">
+            <span id="voucher-btn-text">Klaim Voucher 🎟️</span>
+          </button>
+        </div>
+
+        <!-- Care 4: Peluk Erat Counter -->
+        <div class="hug-counter-box">
+          <div style="font-size: 1.8rem; margin-bottom: 4px;">🤗</div>
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--text-main);">
+            Kirim Pelukan Erat Abib ke Dhea
+          </h3>
+          <div class="hug-number">
+            <span id="hug-count">0</span>
+            <span style="font-size: 1.5rem;">Pelukan</span>
+          </div>
+          <p class="hug-stage-text" id="hug-status">
+            Pencet tombol di bawah untuk menambah kehangatan pelukan Abib!
+          </p>
+          <button class="neu-btn neu-btn-primary" onclick="addHug()">
+            <span>Kirim 1 Pelukan Erat Lagi 🤗💕</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CHAPTER 2: PHOTO GALLERY SHOWCASE (12 PHOTOS WITH MODERN FRAMES)
+         ======================================================================== -->
+    <section class="page-section" id="page-2">
+      <div class="section-header">
+        <div class="section-badge">✨ Chapter 2 &bull; My Beautiful Girl</div>
+        <h2 class="section-title">Galeri Bidadari Tercantik <span>Abib</span> 📸</h2>
+        <p class="section-desc">
+          Setiap kali Abib melihat foto-foto Dhea, rasa syukur selalu memenuhi hati Abib karena memiliki wanita seindah dan seanggun kamu.
+        </p>
+      </div>
+
+      <div class="gallery-grid" id="gallery-container">
+        <!-- 12 Photos will be dynamically injected / rendered with captions -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CHAPTER 3: GOMBALAN & PUJIAN GENERATOR
+         ======================================================================== -->
+    <section class="page-section" id="page-3">
+      <div class="section-header">
+        <div class="section-badge">💖 Chapter 3 &bull; Cheer Up Machine</div>
+        <h2 class="section-title">Mesin Gombalan & <span>Pujian Manis</span> 🎡</h2>
+        <p class="section-desc">
+          Didesain spesial untuk mengalihkan rasa sakit perut Dhea menjadi senyuman manis yang paling indah di dunia.
+        </p>
+      </div>
+
+      <div class="neu-card generator-box">
+        <div style="font-size: 2.2rem; margin-bottom: 8px;">💌</div>
+        <div class="quote-display-wrap">
+          <div>
+            <p class="quote-text" id="quote-output">
+              "Dhea tahu nggak kenapa hari ini perut Dhea sakit? Karena bidadari kalau lagi di bumi butuh istirahat sejenak biar sayapnya tetap bercahaya."
+            </p>
+            <p class="quote-author">— Dari Abib yang selalu mengagumimu</p>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <button class="neu-btn neu-btn-primary" onclick="generateNewQuote()">
+            <span>Pencet Buat Gombalan Baru 💘</span>
+          </button>
+          <button class="neu-btn" onclick="copyQuote()">
+            <span>Salin Gombalan Ini ✨</span>
+          </button>
+        </div>
+
+        <!-- 5 Alasan Kenapa Dhea Begitu Berharga -->
+        <h3 class="reasons-title">5 Hal Kenapa Dhea Itu Rumah Ternyaman Buat Abib 🏡</h3>
+        <div class="reasons-list">
+          <div class="reason-card">
+            <div class="reason-num">1</div>
+            <div class="reason-text"><strong>Senyum Dhea:</strong> Punya daya magis yang langsung bisa meredakan lelah dan stres Abib seketika.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-num">2</div>
+            <div class="reason-text"><strong>Suara Lembut Dhea:</strong> Selalu jadi melodi paling menenangkan yang pengen Abib dengar setiap hari.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-num">3</div>
+            <div class="reason-text"><strong>Hati Dhea yang Tulus:</strong> Kebaikan dan ketulusan Dhea membuat Abib selalu bangga menjadi pasanganmu.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-num">4</div>
+            <div class="reason-text"><strong>Tingkah Lucu & Manja Dhea:</strong> Sisi paling menggemaskan yang selalu bikin Abib kangen dan sayang berlipat ganda.</div>
+          </div>
+          <div class="reason-card">
+            <div class="reason-num">5</div>
+            <div class="reason-text"><strong>Karena Kamu Adalah Dhea:</strong> Abib mencintai semua hal tentang Dhea Aryan Permata, tanpa terkecuali.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CHAPTER 4: SECRET LOVE LETTER FROM ABIB
+         ======================================================================== -->
+    <section class="page-section" id="page-4">
+      <div class="section-header">
+        <div class="section-badge">💌 Chapter 4 &bull; Sincere Words</div>
+        <h2 class="section-title">Surat Cinta Tulus <span>Dari Abib</span> 🕊️</h2>
+        <p class="section-desc">
+          Untaian kata dari lubuk hati terdalam yang selalu ingin Abib sampaikan untuk wanitaku tersayang.
+        </p>
+      </div>
+
+      <div class="letter-parchment">
+        <div class="letter-salutation">Untuk Dhea Aryan Permata, wanitaku tersayang...</div>
+        
+        <div class="letter-body">
+          <p>
+            Melihat kamu harus menahan rasa sakit di hari pertama datang bulan ini membuat Abib ingin sekali bisa memindahkan rasa sakit itu ke Abib sendiri. Kamu adalah wanita yang luar biasa kuat, tapi kamu tidak harus selalu bersikap kuat sendirian.
+          </p>
+          <p>
+            Di hari-hari ketika tubuhmu terasa lelah, suasana hatimu tidak menentu, atau perutmu sedang nyeri, ingatlah bahwa ada Abib di sini. Abib siap menjadi tempatmu bersandar, siap mendengarkan semua keluh kesahmu, dan siap memberikan pelukan terhangat kapan pun kamu butuhkan.
+          </p>
+          <p>
+            Terima kasih sudah hadir di hidup Abib dengan segala keindahan, senyuman, dan kehangatan yang kamu bawa. Istirahat yang cukup yaa sayangku, jangan dipaksa beraktivitas berat dulu. Abib ada di sini, selalu menjaga dan mencintaimu hari ini, esok, dan selamanya.
+          </p>
+        </div>
+
+        <div class="letter-sign">
+          <div style="font-size: 0.9rem; color: var(--text-muted);">Dengan segenap pelukan hangat & cinta tulus,</div>
+          <div class="letter-sign-hand">Abib</div>
+          <div class="letter-sign-name">Yang Selalu Menyayangi Dhea</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CHAPTER 5: FINAL SECTION - "KIRIM PAP CUTE NYA LAGI KE ABIB DONG"
+         ======================================================================== -->
+    <section class="page-section" id="page-5">
+      <div class="neu-card final-request-card">
+        <div class="final-cat-emoji">🥺👉👈</div>
+        
+        <h2 class="final-req-title">
+          <span>kirim pap cute nya lagi ke abib dong</span> 🥰
+        </h2>
+
+        <p class="final-req-desc">
+          Abib kangen banget mau lihat wajah gemas dan senyum manisnya Dhea hari ini... Mau muka cemberut karena lagi sakit perut, muka manja, atau muka lucu, bagi Abib Dhea tetap yang paling cantik dan paling imut di seluruh semesta! 💕
+        </p>
+
+        <!-- Main WhatsApp Button with direct link and prefilled romantic message -->
+        <a 
+          href="https://wa.me/6285133933560?text=Halo%20Abib%20sayang!%20%F0%9F%A5%B0%20Ini%20pap%20cute%20aku%20spesial%20buat%20kamu%2C%20makasih%20banyak%20buat%20website%20romantisnya%20udah%20bikin%20Dhea%20tersenyum%20lagi%20hari%20ini%20%F0%9F%92%96%E2%9C%A8" 
+          target="_blank" 
+          class="wa-button-main"
+          onclick="triggerConfetti()"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+          <span>Kirim PAP Cute ke WhatsApp Abib 📸💖</span>
+        </a>
+
+        <!-- Quick Additional Cute Actions -->
+        <div class="quick-wa-actions">
+          <a 
+            href="https://wa.me/6285133933560?text=Abib%20sayang%2C%20perut%20Dhea%20masih%20agak%20sakit%20nih%20%F0%9F%A5%BA%20elusin%20kepala%20aku%20dong..." 
+            target="_blank" 
+            class="neu-btn neu-btn-sm"
+          >
+            <span>💆 Minta Dielusin Kepala</span>
+          </a>
+          <a 
+            href="https://wa.me/6285133933560?text=Abib%2C%20nanti%20kalau%20Dhea%20udah%20enakan%2C%20suapin%20makanan%20enak%20yaaa%20%F0%9F%A5%B0%F0%9F%8D%B0" 
+            target="_blank" 
+            class="neu-btn neu-btn-sm"
+          >
+            <span>🍰 Minta Disuapin Makanan Enak</span>
+          </a>
+          <a 
+            href="https://wa.me/6285133933560?text=Makasih%20banyak%20ya%20Abib%20udah%20selalu%20sayang%20sama%20Dhea!%20I%20love%20you%20so%20much%20%E2%9D%A4%EF%B8%8F" 
+            target="_blank" 
+            class="neu-btn neu-btn-sm"
+          >
+            <span>❤️ Bilang Love You ke Abib</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Floating Navigation Control -->
+  <nav class="bottom-nav-bar" id="bottom-nav">
+    <button class="neu-btn neu-btn-sm" id="prev-btn" onclick="prevPage()">
+      <span>« Sebelumnya</span>
+    </button>
+    <div class="nav-progress-text" id="page-indicator">
+      Halaman 1 / 6
+    </div>
+    <button class="neu-btn neu-btn-sm neu-btn-primary" id="next-btn" onclick="nextPage()">
+      <span>Selanjutnya » 💕</span>
+    </button>
+  </nav>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="Dhea" id="lightbox-img" class="lightbox-img" />
+      <div style="margin-top: 14px;">
+        <span class="photo-badge-cute" id="lightbox-badge">Bidadari Cantik</span>
+        <h4 id="lightbox-title" style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-main); margin-top: 4px;"></h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT LOGIC & INTERACTION ENGINE
+       ======================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. DATA SETS: PHOTOS & GOMBALAN
+       -------------------------------------------------------------------------- */
+    const photoList = [
+      {
+        src: "photo_1.jpeg",
+        badge: "Bidadari Abib 🌸",
+        title: "Senyuman manis yang selalu bikin hati Abib berdebar"
+      },
+      {
+        src: "photo_2.jpeg",
+        badge: "Wajah Kesayangan ✨",
+        title: "Tatapannya selalu punya sihir yang menenangkan"
+      },
+      {
+        src: "photo_3.jpeg",
+        badge: "Cantiknya Alami 💖",
+        title: "Perempuan paling anggun dan istimewa di mata Abib"
+      },
+      {
+        src: "photo_4.jpeg",
+        badge: "Gemoy Maksimal 🧸",
+        title: "Ekspresi gemas yang selalu bikin Abib pengen cubit pipinya"
+      },
+      {
+        src: "photo_5.jpeg",
+        badge: "My Favorite View 🌷",
+        title: "Nggak pernah bosen memandang wajah seindah kamu"
+      },
+      {
+        src: "photo_6.jpeg",
+        badge: "Sweetest Girl 🍯",
+        title: "Manisnya senyum Dhea mengalahkan semua gula di dunia"
+      },
+      {
+        src: "photo_7.jpeg",
+        badge: "Bikin Candu 🥰",
+        title: "Setiap sudut wajah Dhea adalah keindahan sempurna"
+      },
+      {
+        src: "photo_8.jpeg",
+        badge: "Anggun & Elegan 👑",
+        title: "Ratu di hatinya Abib selamanya"
+      },
+      {
+        src: "photo_9.jpeg",
+        badge: "Cahaya Hati Abib 🌟",
+        title: "Menyinari hari-hari Abib dengan penuh keceriaan"
+      },
+      {
+        src: "photo_10.jpeg",
+        badge: "Imut Banget 🎀",
+        title: "Kelewat gemas sampai Abib senyum-senyum sendiri"
+      },
+      {
+        src: "photo_11.jpeg",
+        badge: "Wanita Terhebat 💫",
+        title: "Tetap cantik dan bersinar dalam kondisi apapun"
+      },
+      {
+        src: "photo_12.jpeg",
+        badge: "Selamanya di Hati ❤️",
+        title: "Dhea Aryan Permata, satu-satunya kesayangan Abib"
+      }
+    ];
+
+    const quotesList = [
+      "Dhea tahu nggak bedanya sakit perut Dhea sama Abib? Kalau sakit perut Dhea ada obatnya, tapi kalau rasa sayang Abib ke Dhea nggak ada obatnya karena udah overdosis cinta! 💖",
+      "Hari ini Dhea istirahat aja yaa. Biar rasa sakitnya Abib yang tanggung, Dhea tinggal nikmatin dicintai sama disayang Abib sepuasnya. 🥺",
+      "Kalau rasa sakit perut kamu bisa diubah jadi koin, Abib mau beli semua toko cokelat di dunia buat disuapin ke Dhea sekarang juga. 🍫",
+      "Kamu tahu nggak kenapa bintang di langit malam ini pada redup? Karena mereka malu, ada bidadari bernama Dhea Aryan Permata yang jauh lebih berkilau di bumi! ✨",
+      "Perut kamu boleh keram hari ini sayang, tapi hati kamu harus tetap hangat ya, karena di dalamnya ada cinta Abib yang selalu ngelindungin kamu 24/7. ❤️🩹",
+      "Dhea jangan cemberut terus yaa cantik... Senyum dong sedikit, soalnya senyum Dhea itu suplemen terbaik yang bikin Abib semangat setiap hari! 🥰",
+      "Abib udah daftar jadi pelindung resmi Dhea seumur hidup. Jadi kalau ada yang bikin Dhea sedih atau sakit, laporin ke Abib yaa! 👮‍♂️💕",
+      "Kata orang obat sakit perut itu obat pereda nyeri, tapi bagi Abib, obat paling ampuh buat bikin Dhea tenang adalah pelukan hangat Abib. 🤗",
+      "Di antara 8 milyar manusia di bumi, cuma Dhea Aryan Permata yang punya password hati Abib selamanya. 🔐💖",
+      "Kamu nggak usah khawatir kelihatan lemes hari ini, bagi Abib muka bantal atau muka manja Dhea tetap yang paling mempesona! 🌸"
+    ];
+
+    /* --------------------------------------------------------------------------
+       2. SOUND SYNTHESIZER (WEB AUDIO API) FOR CUTE CHIMES & FEEDBACK
+       -------------------------------------------------------------------------- */
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playCuteChime(type = 'pop') {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+
+        if (type === 'pop') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        } else if (type === 'heart') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+          osc.frequency.setValueAtTime(1046.50, now + 0.24); // C6
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        } else if (type === 'warm') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.linearRampToValueAtTime(554.37, now + 0.25);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+          osc.start(now);
+          osc.stop(now + 0.5);
+        }
+      } catch (e) {
+        // Silent fallback if audio context blocked
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       3. BACKGROUND MUSIC (1000X.mp3) CONTROLLER
+       -------------------------------------------------------------------------- */
+    const bgAudio = document.getElementById('bg-audio');
+    const vinyl = document.getElementById('vinyl');
+    const audioPill = document.getElementById('audio-pill');
+    const audioStatus = document.getElementById('audio-status');
+    let isPlaying = false;
+
+    function dismissSplashAndPlay() {
+      const splash = document.getElementById('welcome-splash');
+      if (splash) {
+        splash.classList.add('hidden');
+      }
+      playAudio();
+      playCuteChime('heart');
+      spawnHeartsCelebration("Selamat Menikmati Ruangan Cinta Ini, Dhea Sayang! 🌸💖");
+    }
+
+    function playAudio() {
+      if (isPlaying) return;
+      const playPromise = bgAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          vinyl.classList.add('playing');
+          audioPill.classList.add('playing');
+          audioStatus.textContent = "Sedang Memutar 💖";
+          const splash = document.getElementById('welcome-splash');
+          if (splash) splash.classList.add('hidden');
+          removeAutoplayListeners();
+        }).catch(err => {
+          console.log("Autoplay ditahan oleh browser policy, menunggu interaksi pertama:", err);
+          setupAutoplayFallback();
+        });
+      }
+    }
+
+    function setupAutoplayFallback() {
+      const startOnInteraction = () => {
+        if (!isPlaying) {
+          dismissSplashAndPlay();
+        }
+      };
+      ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'pointerdown'].forEach(evt => {
+        window.addEventListener(evt, startOnInteraction, { once: true, passive: true });
+      });
+    }
+
+    function removeAutoplayListeners() {
+      // Event listeners with { once: true } are auto-removed
+    }
+
+    function pauseAudio() {
+      bgAudio.pause();
+      isPlaying = false;
+      vinyl.classList.remove('playing');
+      audioPill.classList.remove('playing');
+      audioStatus.textContent = "Jeda Musik ⏸️";
+    }
+
+    function toggleAudio() {
+      playCuteChime('pop');
+      if (isPlaying) {
+        pauseAudio();
+      } else {
+        playAudio();
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       4. MULTI-PAGE / CHAPTER NAVIGATION SYSTEM
+       -------------------------------------------------------------------------- */
+    let currentPage = 0;
+    const totalPages = 6;
+    const pages = [
+      document.getElementById('page-0'),
+      document.getElementById('page-1'),
+      document.getElementById('page-2'),
+      document.getElementById('page-3'),
+      document.getElementById('page-4'),
+      document.getElementById('page-5')
+    ];
+    const chapterDots = document.querySelectorAll('.chapter-dot');
+    const pageIndicator = document.getElementById('page-indicator');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function updateNavUI() {
+      chapterDots.forEach((dot, index) => {
+        if (index === currentPage) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      pageIndicator.textContent = `Halaman ${currentPage + 1} / ${totalPages}`;
+
+      // Update button states
+      if (currentPage === 0) {
+        prevBtn.style.visibility = 'hidden';
+      } else {
+        prevBtn.style.visibility = 'visible';
+      }
+
+      if (currentPage === totalPages - 1) {
+        nextBtn.innerHTML = `<span>Kembali ke Awal 🌸</span>`;
+      } else {
+        nextBtn.innerHTML = `<span>Selanjutnya » 💕</span>`;
+      }
+    }
+
+    function goToPage(targetIndex) {
+      if (targetIndex < 0 || targetIndex >= totalPages || targetIndex === currentPage) return;
+
+      playCuteChime('pop');
+      pages[currentPage].classList.remove('active');
+      currentPage = targetIndex;
+      pages[currentPage].classList.add('active');
+      updateNavUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextPage() {
+      if (currentPage === totalPages - 1) {
+        goToPage(0);
+      } else {
+        goToPage(currentPage + 1);
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        goToPage(currentPage - 1);
+      }
+    }
+
+    function startJourney() {
+      playCuteChime('heart');
+      playAudio();
+      spawnHeartsCelebration("Selamat Menikmati Ruangan Cinta Ini, Dhea Sayang! 🌸💖");
+      goToPage(1);
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextPage();
+      if (e.key === 'ArrowLeft') prevPage();
+    });
+
+    /* --------------------------------------------------------------------------
+       5. INTERACTIVE CARE KIT & HUG COUNTER (CHAPTER 1)
+       -------------------------------------------------------------------------- */
+    let hugCount = 0;
+    const hugStatus = document.getElementById('hug-status');
+    const hugCountDisplay = document.getElementById('hug-count');
+
+    function addHug() {
+      hugCount++;
+      hugCountDisplay.textContent = hugCount;
+      playCuteChime('heart');
+      spawnClickHeart(window.innerWidth / 2, window.innerHeight / 2);
+
+      if (hugCount === 1) {
+        hugStatus.textContent = "1 Pelukan hangat Abib berhasil sampai ke Dhea! Usap-usap punggungnya yaa.. 🥰";
+      } else if (hugCount === 5) {
+        hugStatus.textContent = "5 Pelukan! Abib elus kepalanya Dhea biar nyaman dan tenang 💆‍♀️✨";
+      } else if (hugCount === 15) {
+        hugStatus.textContent = "15 Pelukan! Kehangatan Abib siap basmi semua kram perut Dhea! 🔥💕";
+      } else if (hugCount >= 30) {
+        hugStatus.textContent = `${hugCount} Pelukan Erat! Abib peluk Dhea seharian penuh tanpa lepas! ❤️🩹`;
+      }
+    }
+
+    let isWarmActive = false;
+    function triggerWarmCompress() {
+      isWarmActive = !isWarmActive;
+      const warmCard = document.getElementById('warm-card');
+      const warmBtnText = document.getElementById('warm-btn-text');
+
+      playCuteChime('warm');
+      if (isWarmActive) {
+        warmCard.classList.add('warm-glow-active');
+        warmBtnText.textContent = "Kehangatan Menyala ♨️ (Menenangkan)";
+        spawnHeartsCelebration("Sensasi kompres hangat aktif... Rileks yaa sayangku 🥰");
+      } else {
+        warmCard.classList.remove('warm-glow-active');
+        warmBtnText.textContent = "Nyalakan Kehangatan 🌟";
+      }
+    }
+
+    function redeemVoucher() {
+      playCuteChime('heart');
+      const voucherBtn = document.getElementById('voucher-btn-text');
+      voucherBtn.textContent = "Voucher Aktif Selamanya! ✅";
+      spawnHeartsCelebration("Voucher Berhasil Diklaim! Dhea bebas manja ke Abib seumur hidup 👑💖");
+    }
+
+    /* --------------------------------------------------------------------------
+       6. RENDER PHOTO GALLERY & LIGHTBOX (CHAPTER 2)
+       -------------------------------------------------------------------------- */
+    const galleryContainer = document.getElementById('gallery-container');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxBadge = document.getElementById('lightbox-badge');
+    const lightboxTitle = document.getElementById('lightbox-title');
+
+    function renderGallery() {
+      galleryContainer.innerHTML = '';
+      photoList.forEach((photo, index) => {
+        const card = document.createElement('div');
+        card.className = 'photo-frame-card';
+        card.onclick = () => openLightbox(index);
+
+        card.innerHTML = `
+          <div class="photo-tape"></div>
+          <div class="photo-img-wrap">
+            <img src="${photo.src}" alt="${photo.badge}" loading="lazy" />
+          </div>
+          <div class="photo-caption-box">
+            <span class="photo-badge-cute">${photo.badge}</span>
+            <p class="photo-note">${photo.title}</p>
+          </div>
+        `;
+        galleryContainer.appendChild(card);
+      });
+    }
+
+    function openLightbox(index) {
+      playCuteChime('pop');
+      const photo = photoList[index];
+      lightboxImg.src = photo.src;
+      lightboxBadge.textContent = photo.badge;
+      lightboxTitle.textContent = photo.title;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      playCuteChime('pop');
+      lightbox.classList.remove('active');
+    }
+
+    /* --------------------------------------------------------------------------
+       7. GOMBALAN & PUJIAN GENERATOR (CHAPTER 3)
+       -------------------------------------------------------------------------- */
+    let lastQuoteIdx = -1;
+    function generateNewQuote() {
+      playCuteChime('heart');
+      let randomIdx;
+      do {
+        randomIdx = Math.floor(Math.random() * quotesList.length);
+      } while (randomIdx === lastQuoteIdx && quotesList.length > 1);
+
+      lastQuoteIdx = randomIdx;
+      const quoteOutput = document.getElementById('quote-output');
+      
+      quoteOutput.style.opacity = '0';
+      quoteOutput.style.transform = 'scale(0.95)';
+
+      setTimeout(() => {
+        quoteOutput.textContent = `"${quotesList[randomIdx]}"`;
+        quoteOutput.style.opacity = '1';
+        quoteOutput.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    function copyQuote() {
+      const quoteOutput = document.getElementById('quote-output').textContent;
+      navigator.clipboard.writeText(quoteOutput).then(() => {
+        playCuteChime('pop');
+        spawnHeartsCelebration("Gombalan manis berhasil disalin! ✨💖");
+      });
+    }
+
+    /* --------------------------------------------------------------------------
+       8. PARTICLES & FLOATING HEARTS ENGINE (CANVAS)
+       -------------------------------------------------------------------------- */
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const particleEmojis = ['🌸', '✨', '💖', '💕', '🌷', '🤍', '🧁'];
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height - height;
+        this.size = Math.random() * 16 + 12;
+        this.speedY = Math.random() * 1.2 + 0.6;
+        this.speedX = Math.sin(Math.random() * Math.PI) * 0.8 - 0.4;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 2;
+        this.emoji = particleEmojis[Math.floor(Math.random() * particleEmojis.length)];
+        this.opacity = Math.random() * 0.6 + 0.3;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.rotation += this.rotSpeed;
+        if (this.y > height + 50) {
+          this.reset();
+          this.y = -20;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.font = `${this.size}px serif`;
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.fillText(this.emoji, 0, 0);
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 28; i++) {
+      const p = new Particle();
+      p.y = Math.random() * height; // initial spread
+      particles.push(p);
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* --------------------------------------------------------------------------
+       9. CLICK MOUSE / TOUCH TRAIL & CELEBRATION EFFECTS
+       -------------------------------------------------------------------------- */
+    function spawnClickHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      const symbols = ['💖', '💕', '🌸', '✨', '🥰', '🤍'];
+      heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1200);
+    }
+
+    window.addEventListener('click', (e) => {
+      spawnClickHeart(e.clientX, e.clientY);
+    });
+
+    function spawnHeartsCelebration(message = '') {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const rx = window.innerWidth / 2 + (Math.random() - 0.5) * 300;
+          const ry = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
+          spawnClickHeart(rx, ry);
+        }, i * 70);
+      }
+
+      if (message) {
+        const toast = document.createElement('div');
+        toast.style.position = 'fixed';
+        toast.style.bottom = '100px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = 'rgba(255, 255, 255, 0.92)';
+        toast.style.backdropFilter = 'blur(15px)';
+        toast.style.border = '1.5px solid rgba(255, 255, 255, 0.95)';
+        toast.style.boxShadow = '0 15px 35px rgba(255, 100, 140, 0.3)';
+        toast.style.color = '#D81B60';
+        toast.style.fontFamily = 'var(--font-heading)';
+        toast.style.fontWeight = '700';
+        toast.style.fontSize = '0.92rem';
+        toast.style.padding = '12px 24px';
+        toast.style.borderRadius = '9999px';
+        toast.style.zIndex = '9999';
+        toast.style.textAlign = 'center';
+        toast.style.maxWidth = '90%';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(-50%) translateY(20px)';
+          setTimeout(() => toast.remove(), 400);
+        }, 2500);
+      }
+    }
+
+    function triggerConfetti() {
+      playCuteChime('heart');
+      spawnHeartsCelebration("Membuka WhatsApp ke Abib... Kirim senyum termanismu yaa sayang! 📸💖");
+    }
+
+    /* --------------------------------------------------------------------------
+       10. INITIALIZATION & AUTOPLAY TRIGGER
+       -------------------------------------------------------------------------- */
+    function initApp() {
+      renderGallery();
+      updateNavUI();
+      playAudio();
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+    window.addEventListener('load', () => {
+      if (!isPlaying) playAudio();
+    });
+
+    // Immediate attempt
+    try {
+      playAudio();
+    } catch(e) {}
+  </script>
+</body>
+</html>
